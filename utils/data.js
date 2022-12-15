@@ -129,7 +129,7 @@ const data = {
       brand: 'YD',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 24,
+      countInStock: 5,
       description: 'Casual Blazer for men, comfortable to wear all seasons',
     },
   ],
