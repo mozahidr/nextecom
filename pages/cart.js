@@ -5,8 +5,9 @@ import Link from 'next/link';
 import Image from 'next/legacy/image';
 import { XCircleIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
-export default function CartScreen() {
+function CartScreen() {
   const {state, dispatch } = useContext(Store);
   const router = useRouter();
 
@@ -101,3 +102,5 @@ export default function CartScreen() {
     </Layout>
   )
 }
+
+export default dynamic(() => Promise.resolve(CartScreen), {ssr: false});
