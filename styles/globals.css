@@ -33,6 +33,9 @@ a {
 .primary-button {
   @apply rounded bg-amber-500 py-2 px-4 shadow outline-none hover:bg-amber-600 active:bg-amber-700;
 }
+.default-button {
+  @apply rounded bg-gray-100 py-2 px-4 text-black shadow outline-none hover:bg-gray-100 active:bg-gray-300;
+}
 
 input,
 select,
@@ -41,4 +44,12 @@ textarea {
 }
 .dropdown-link {
   @apply flex p-2 hover:bg-gray-200;
+}
+.Select {
+  box-shadow: none !important;
+  outline: none;
+  border: 0;
+}
+.Select:hover {
+  border: 0 !important;
 }
