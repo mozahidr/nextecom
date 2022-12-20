@@ -53,3 +53,22 @@ textarea {
 .Select:hover {
   border: 0 !important;
 }
+header {
+  position: fixed;
+  background-color: #f3f2ef;
+  color: white;
+  width: 100%;
+  top: 0;
+  height: 50px;
+  padding-bottom: 10px;
+  z-index: 1;
+  /* Animations */
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+}
+.nav__black {
+  background-color: #F6F8FA;
+}
+.mainMargin {
+  margin-top: 70px;
+}

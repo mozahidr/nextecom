@@ -5,27 +5,31 @@ import data from '../../utils/data';
 import Link from 'next/link';
 import Image from 'next/legacy/image';
 import { Store } from '../../utils/Store';
+import db from '../../utils/db';
+import Product from '../../models/Product';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-export default function ProductScreen() {
+export default function ProductScreen(props) {
+    const { product } = props;
     const { state, dispatch } = useContext(Store);
     const router = useRouter();
-    const { query } = useRouter();
-    const { slug } = query;
-    const product = data.products.find(pro => pro.slug === slug);
 
     if(!product) {
-        return <h2>Product Not Found</h2>
+        return <Layout title="Product Not Found">
+            Product Not Found
+        </Layout>
     }
 
-    const addToCartHandler = () => {
+    const addToCartHandler = async () => {
         const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
         const quantity = existItem ? existItem.quantity + 1 : 1;
+        // axios is library to fetch data from backend api 
+        const { data } = await axios.get(`/api/products/${product._id}`);
 
-        if(product.countInStock < quantity) {
-            alert("Sorry. Product is out to Stock");
-            return;
+        if(data.countInStock < quantity) {
+            return toast.error('Sorry. Product is out to Stock');
         }
-
         dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
         router.push('/cart');
     }
@@ -67,4 +71,19 @@ export default function ProductScreen() {
         </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+    // lean() converted to javascript object
+
+    const { params } = context;
+    const { slug } = params;
+    await db.connect();
+    const product = await Product.findOne({ slug }).lean();
+    await db.disconnect();
+    return {
+        props: {
+            product: product ? db.convertDocToObj(product) : null,
+        }
+    }
 }

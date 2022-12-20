@@ -10,6 +10,17 @@ import { DropdownLink } from './DropdownLink';
 import Cookies from 'js-cookie';
 
 export const Layout = ({ title, children }) => {
+    // for change the navbar background color
+    const [show, handleShow] = useState(false);
+
+    const transitionNavBar = () => {
+        window.scrollY > 100 ? handleShow(true) : handleShow(false);
+    }
+    useEffect(() => {
+        window.addEventListener('scroll', transitionNavBar);
+        return () => window.removeEventListener('scroll', transitionNavBar);
+    }, []);
+
     const { data: session, status } = useSession();
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
@@ -37,7 +48,7 @@ export const Layout = ({ title, children }) => {
         <ToastContainer position='bottom-center' limit={1} />
         <div className='flex min-h-screen flex-col justify-between'>
             <header>
-                <nav className='flex h-12 justify-between shadow-md items-center px-4'>
+                <nav className={`flex h-12 justify-between shadow-lg items-center px-4 ${show && "nav__black"}`}>
                     <Link href="/" legacyBehavior>
                         <a className='text-lg font-bold'>Amazona</a>
                     </Link>
@@ -83,8 +94,24 @@ export const Layout = ({ title, children }) => {
                     </div>
                 </nav>
             </header>
-            <main className='container m-auto mt-4 px-4'>
+            {/* free shipping */}
+            {/* <div className='flex h-12 justify-between shadow-lg items-center px-4 divide-y divide-slate-200 mainMargin'>
+                    Free express delivery over $50
+            </div> */}
+            <main className='container m-auto px-4 mainMargin'>
                 {children}
+                 {/* Bubbles */}
+                 <div className='eacss'>
+                    <div className='bubble floating bx1'><span></span></div>
+                    <div className='bubble floating bx2 m-hide'><span></span></div>
+                    <div className='bubble floating bx3'><span></span></div>
+                    <div className='bubble floating bx4'><span></span></div>
+                    <div className='bubble floating bx5 m-hide'><span></span></div>
+                    <div className='bubble floating bx6 m-hide'><span></span></div>
+                    <div className='bubble floating bx7'><span></span></div>
+                    <div className='bubble floating bx8 m-hide'><span></span></div>
+                    <div className='bubble floating bx9 m-hide'><span></span></div>
+                 </div>
             </main>
             <footer className='flex justify-center items-center h-10 shadow-inner'>Copyright 2022 Amazona</footer>
         </div>

@@ -21,3 +21,8 @@ description
     # Insert sample products to mongodb
     # Load products from db in home and product page
     # Check product count in Stock in add to cart
+
+## Load Products from MongoDB
+    # Load products in home page fomr MongoDB
+    # Load Products in product page from MongoDB
+    # Use product api to check count in stock in add to cart
