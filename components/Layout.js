@@ -8,17 +8,46 @@ import { Menu } from '@headlessui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { DropdownLink } from './DropdownLink';
 import Cookies from 'js-cookie';
+import { FaArrowCircleUp } from 'react-icons/fa';
+import { Button } from './Styles';
 
 export const Layout = ({ title, children }) => {
     // for change the navbar background color
     const [show, handleShow] = useState(false);
+    const [showmenu, handleShowmenu] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        scrolled > 300 ? setVisible(true) : setVisible(false);
+    }
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', toggleVisible);
+        return () => window.removeEventListener('scroll', toggleVisible);
+
+    }, []);
 
     const transitionNavBar = () => {
         window.scrollY > 100 ? handleShow(true) : handleShow(false);
     }
+    const transitionNavSec = () => {
+        window.scrollY > 120 ? handleShowmenu(true) : handleShowmenu(false);
+    }
     useEffect(() => {
         window.addEventListener('scroll', transitionNavBar);
         return () => window.removeEventListener('scroll', transitionNavBar);
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', transitionNavSec);
+        return () => window.removeEventListener('scroll', transitionNavSec);
     }, []);
 
     const { data: session, status } = useSession();
@@ -94,11 +123,16 @@ export const Layout = ({ title, children }) => {
                     </div>
                 </nav>
             </header>
+            <div className={`grid dis grid-cols-3 gap-4 my-12 justify-between text-center border-y-2 py-3 shadow-md font-semibold w-full ${showmenu && "fixedSecNav"}`}>
+                <div>METRO - ORDER WITH SAME DAY BY 12PM 23RD FOR CHRISTMAS</div>
+                <div>FREE EXPRESS DELIVERY OVER $100*</div>
+                <div>FREE CLICK & COLLECT</div>
+            </div>
             {/* free shipping */}
             {/* <div className='flex h-12 justify-between shadow-lg items-center px-4 divide-y divide-slate-200 mainMargin'>
                     Free express delivery over $50
             </div> */}
-            <main className='container m-auto px-4 mainMargin'>
+            <main className='container m-auto px-4 pt-4 mainMargin'>
                 {children}
                  {/* Bubbles */}
                  <div className='eacss'>
@@ -115,6 +149,11 @@ export const Layout = ({ title, children }) => {
             </main>
             <footer className='flex justify-center items-center h-10 shadow-inner'>Copyright 2022 Amazona</footer>
         </div>
+        {/* scroll to top */}
+        <Button>
+            <FaArrowCircleUp onClick={scrollToTop}
+                style={{display: visible ? 'inline' : 'none'}} />
+        </Button>
     </>
   )
 }

@@ -32,3 +32,8 @@ description
     # Display payment method
     # Display order items
     # Implement create order
+
+## Create Order Screen
+    # Implement backend api for order details
+    # Load order data from backed
+    # Display order details

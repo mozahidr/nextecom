@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 a {
@@ -72,4 +72,30 @@ header {
 }
 .mainMargin {
   margin-top: 70px;
+}
+
+.alert-error {
+  @apply my-3 rounded-lg bg-red-100 p-3 text-red-700;
+}
+.alert-success {
+  @apply my-3 rounded-lg bg-green-100 p-3 text-green-700;
+}
+.dis {
+  display: none;
+}
+
+.fixedSecNav {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  top: 0;
+  z-index: 1;
+  background: #F6F8FA;
+  opacity: 0.8;
+  color: black !important;
+  /* Animations */
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  transition: all 0.8s;
+  transition-duration: 300;
 }
