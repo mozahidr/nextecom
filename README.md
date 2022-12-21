@@ -37,3 +37,8 @@ description
     # Implement backend api for order details
     # Load order data from backed
     # Display order details
+
+## Create Register Screen
+    # Add signup api
+    # Create registration page
+    # Call api on form submit

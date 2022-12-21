@@ -62,8 +62,8 @@ export const Layout = ({ title, children }) => {
 
     // Logout handler
     const logoutClickHandler = () => {
-        Cookies.remove('cart');
-        dispatch({ type: 'CART_RESET'});
+        //Cookies.remove('cart');
+        //dispatch({ type: 'CART_RESET'});
         signOut({ callbackUrl: '/login' });
     }
 
