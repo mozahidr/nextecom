@@ -26,3 +26,9 @@ description
     # Load products in home page fomr MongoDB
     # Load Products in product page from MongoDB
     # Use product api to check count in stock in add to cart
+
+## Create Place Order Screen
+    # Display shipping address
+    # Display payment method
+    # Display order items
+    # Implement create order

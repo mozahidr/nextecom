@@ -84,7 +84,8 @@ export default function ShippingScreen() {
             </div>
             <div className='mb-4'>
                 <label htmlFor='postalCode'>Coutnry</label>
-                <Select required id='country' {...register('country')} className='Select' options={options} value={optionvalue} onChange={changeHandler} />
+                <input id='country' className='w-full' {...register('country', {required: 'Please enter Country' })} />
+                {/* <Select required id='country' {...register('country')} className='Select' options={options} value={optionvalue} onChange={changeHandler} /> */}
                 {errors.country && (
                     <div className='text-red-500'>{errors.country.message}</div>
                 )}
