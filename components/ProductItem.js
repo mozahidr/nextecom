@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import React, {useContext } from 'react';
-import { useRouter } from 'next/router';
-import { Store } from '../utils/Store';
+import React from 'react';
 
 export const ProductItem = ({ product, addToCartHandler }) => {
   //  const { state, dispatch } = useContext(Store);

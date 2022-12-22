@@ -1,9 +1,10 @@
-import React, { useState, useMemo, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+//import React, { useState, useMemo, useContext, useEffect } from 'react';
 //import Select from 'react-select'
 import { useForm } from 'react-hook-form';
 import CheckoutWizard from '../components/CheckoutWizard';
 import { Layout } from '../components/Layout';
-import countryList from 'react-select-country-list';
+//import countryList from 'react-select-country-list';
 import { Store } from '../utils/Store';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
