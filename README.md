@@ -42,3 +42,9 @@ description
     # Add signup api
     # Create registration page
     # Call api on form submit
+
+## Pay Order By Paypal
+    # Display paypal button
+    # Handle payment
+    # Create backend api
+    # Update order state
