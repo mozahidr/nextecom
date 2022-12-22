@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import { Store } from '../utils/Store';
 
 export const ProductItem = ({ product, addToCartHandler }) => {
-    const { state, dispatch } = useContext(Store);
-    const { query } = useRouter();
-    const { slug } = query;
+  //  const { state, dispatch } = useContext(Store);
+    //const { query } = useRouter();
+   // const { slug } = query;
 
   return (
     <div className='card'>

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext, useEffect } from 'react';
-import Select from 'react-select'
+//import Select from 'react-select'
 import { useForm } from 'react-hook-form';
 import CheckoutWizard from '../components/CheckoutWizard';
 import { Layout } from '../components/Layout';
@@ -10,10 +10,10 @@ import { useRouter } from 'next/router';
 
 export default function ShippingScreen() {
     // geting country list
-    const [optionvalue, setOptionValue] = useState('');
-    const options = useMemo(() => countryList().getData(), []);
+    //const [optionvalue, setOptionValue] = useState('');
+    //const options = useMemo(() => countryList().getData(), []);
 
-    const { handleSubmit, register, formState : { errors }, setValue, getValues } = useForm();
+    const { handleSubmit, register, formState : { errors }, setValue } = useForm();
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
     const { shippingAddress } = cart;
@@ -45,9 +45,9 @@ export default function ShippingScreen() {
             router.push('/payment');
     };
     // select country
-    const changeHandler = (optionvalue) => {
-        setOptionValue(optionvalue);
-    }
+    // const changeHandler = (optionvalue) => {
+    //     setOptionValue(optionvalue);
+    // }
   return (
     <Layout title="Shipping address">
         <CheckoutWizard activeStep={1} />

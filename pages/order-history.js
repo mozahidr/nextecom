@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { getError } from '../utils/error';
 import axios from 'axios';
 import { Layout } from '../components/Layout';

@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import { Menu } from '@headlessui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { DropdownLink } from './DropdownLink';
-import Cookies from 'js-cookie';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { Button } from './Styles';
 
@@ -51,7 +50,7 @@ export const Layout = ({ title, children }) => {
     }, []);
 
     const { data: session, status } = useSession();
-    const { state, dispatch } = useContext(Store);
+    const { state } = useContext(Store);
     const { cart } = state;
     const [cartItemsCount, setCartItemsCount] = useState(0);
 

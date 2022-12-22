@@ -3,7 +3,7 @@ import db from "../../../../utils/db";
 import Order from "../../../../models/Order";
 import { getSession } from "next-auth/react";
 
-const handler = async (req, res, next) => {
+const handler = async (req, res) => {
     const session = await getSession({ req });
     if(!session) {
         return res.status(401).send('Sign In required');

@@ -34,7 +34,7 @@ export default function LoginScreen() {
                 toast.error(result.error);
             }
             
-        } catch (error) {
+        } catch (err) {
             toast.error(getError(err));
         }
     }
