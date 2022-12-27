@@ -53,3 +53,13 @@ description
     # Create my order api
     # Create order history component
     # Fetch orders and display them
+
+## Update User Profile
+    # Create user profile screen
+    # Show user info
+    # Handle update user info
+
+## Search Products
+    # Create search page
+    # Added pagination and filtering options
+    

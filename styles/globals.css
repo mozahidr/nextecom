@@ -41,7 +41,7 @@ a {
 input,
 select,
 textarea {
-  @apply rounded border p-2 outline-none ring-indigo-300 focus:ring;
+  @apply rounded border p-2 outline-none ring-indigo-300;
 }
 .dropdown-link {
   @apply flex p-2 hover:bg-gray-200;
@@ -90,12 +90,16 @@ header {
   justify-content: space-around;
   text-align: center;
   top: 0;
-  z-index: 1;
+  z-index: 99;
   background: #F6F8FA;
-  opacity: 0.8;
+  opacity: 1;
   color: black !important;
   /* Animations */
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  transition: all 0.8s;
-  transition-duration: 300;
+  /* transition: all 0.8s; 
+  transition-duration: 300;*/
+
+  transform: translateY(0);
+  transition: box-shadow 667ms ease-in-out,transform 667ms ease-in-out,visibility 0s linear 0s;
+  visibility: visible;
 }

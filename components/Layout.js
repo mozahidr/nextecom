@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DropdownLink } from './DropdownLink';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { Button } from './Styles';
+import { useRouter } from 'next/router';
 
 export const Layout = ({ title, children }) => {
     // for change the navbar background color
@@ -66,6 +67,14 @@ export const Layout = ({ title, children }) => {
         signOut({ callbackUrl: '/login' });
     }
 
+    // SEARCH handler
+    const [query, setQuery] = useState('');
+    const router = useRouter();
+    const submitHandler = (e) => {
+        e.preventDefault();
+        router.push(`/search?query=${query}`);
+    }
+
   return (
     <>
         <Head>
@@ -76,10 +85,25 @@ export const Layout = ({ title, children }) => {
         <ToastContainer position='bottom-center' limit={1} />
         <div className='flex min-h-screen flex-col justify-between'>
             <header>
-                <nav className={`flex h-12 justify-between shadow-lg items-center px-4 ${show && "nav__black"}`}>
+                <nav className={`flex justify-between shadow-lg items-center px-4 ${show && "nav__black"}`}>
                     <Link href="/" legacyBehavior>
                         <a className='text-lg font-bold'>Amazona</a>
                     </Link>
+                    <div class="grid gap-4 grid-cols-2 grid-rows-1 text-red-700">
+                        <span>
+                        <div class="xl:w-96">
+                            <form className='mx-auto hidden w-full justify-center md:flex' onSubmit={submitHandler}>
+                            <input
+                                type="search"
+                                class="form-control block w-full px-2 py-2 my-1 text-base font-normal text-gray-700  bg-white bg-clip-padding border border-solid border-gray-300 rounded  transition ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="exampleSearch"
+                                placeholder="Search Product..."
+                                onChange={(e) => setQuery(e.target.value)}
+                            />
+                            </form>
+                        </div>
+                        </span>
+                    </div>
                     <div>
                         <Link legacyBehavior href="/cart"><a className='p-2'>
                             Cart
@@ -96,7 +120,7 @@ export const Layout = ({ title, children }) => {
                                 <Menu.Button className="text-blue-600">
                                     {session.user.name}
                                 </Menu.Button>
-                                <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white shadow-lg">
+                                <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white shadow-lg transition-all">
                                     <Menu.Item>
                                         <DropdownLink className="dropdown-link" href="/profile">
                                             Profile
@@ -107,6 +131,13 @@ export const Layout = ({ title, children }) => {
                                             Order History
                                         </DropdownLink>
                                     </Menu.Item>
+                                    {session.user.isAdmin && (
+                                        <Menu.Item>
+                                            <DropdownLink className="dropdown-link" href="/admin/dashboard">
+                                                Admin Dashboard
+                                            </DropdownLink>
+                                        </Menu.Item>
+                                    )}
                                     <Menu.Item>
                                         <DropdownLink className="dropdown-link" href="#" onClick={logoutClickHandler}>
                                             Logout

@@ -33,6 +33,8 @@ export default NextAuth({
                     return {
                         _id: user._id,
                         name: user.name,
+                        lastName: user.lastName,
+                        mobile: user.mobile,
                         email: user.email,
                         image: 'f',
                         isAdmin: user.isAdmin,

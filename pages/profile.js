@@ -1,52 +1,59 @@
-import Link from 'next/link';
 import React, { useEffect } from 'react';
-import { Layout } from '../components/Layout';
+import { useSession, signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
-import { signIn, useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { getError } from '../utils/error';
-import { useRouter } from 'next/router';
-//import { redirect } from 'next/dist/server/api-utils';
 import axios from 'axios';
-import FacebookLogin from '@greatsumini/react-facebook-login';
+import { Layout } from '../components/Layout';
 
-export default function RegisterScreen() {
-
+function ProfileScreen() {
     const { data: session } = useSession();
-    const router = useRouter();
-    const { redirect } = router.query;
+    const {
+        handleSubmit,
+        register,
+        getValues,
+        setValue,
+        formState: { errors },
+    } = useForm();
 
     useEffect(() => {
-        if(session?.user) {
-            router.push(redirect || '/');
-        }
-    }, [router, session, redirect]);
-
-    const { handleSubmit, register, getValues, formState : { errors }, } = useForm();
+        setValue('name', session.user.name);
+        setValue('lastName', session.user.lastName);
+        setValue('mobile', session.user.mobile);
+        setValue('email', session.user.email);
+        console.log(session.user);
+    }, [session.user, setValue]);
 
     const submitHandler = async ({ name, lastName, mobile, email, password }) => {
         try {
-            await axios.post('/api/auth/signup', {
-                name, lastName, mobile, email, password,
-            })
+            await axios.put('/api/auth/update', {
+                name,
+                lastName,
+                mobile,
+                email,
+                password,
+            });
             const result = await signIn('credentials', {
                 redirect: false,
                 email,
                 password,
             });
-            
+
+            toast.success("Profile updated successfully");
             if(result.error) {
                 toast.error(result.error);
             }
-            
         } catch (err) {
             toast.error(getError(err));
         }
     }
   return (
-    <Layout title="Create Account">
-        <form onSubmit={handleSubmit(submitHandler)} className='mx-auto max-w-screen-md'>
-            <h1 className='mb-4 text-xl'>Create Account</h1>
+    <Layout title="Profile">
+        <form 
+            className='mx-auto max-w-screen-md'
+            onSubmit={handleSubmit(submitHandler)}
+        >
+            <h1 className='mb-4 text-xl'>Update Profile</h1>
             <div className='mb-4'>
                 <label htmlFor='name'>First Name</label>
                 <input 
@@ -62,7 +69,7 @@ export default function RegisterScreen() {
                     )}
             </div>
             <div className='mb-4'>
-                <label htmlFor='lastName'>Last Name</label>
+                <label htmlFor='    '>Last Name</label>
                 <input 
                     type="text"
                     id="lastName"
@@ -136,28 +143,13 @@ export default function RegisterScreen() {
                      )}
             </div>
             <div className='mb-4'>
-                <button className='primary-button'>Register</button>
+                <button className='primary-button'>Update Profile</button>
             </div>
-            <div className='mb-4'>
-                Don&apos;t have an account? &nbsp;
-                <Link href={`/register?redirect=${redirect || '/'}`} legacyBehavior>
-                    Register          
-                </Link>
-                {/* <FacebookLogin
-                        appId="1184584625790432"
-                        onSuccess={(response) => {
-                            console.log('Login Success!', response);
-                        }}
-                        onFail={(error) => {
-                            console.log('Login Failed!', error);
-                        }}
-                        onProfileSuccess={(response) => {
-                            console.log('Get Profile Success!', response);
-                            console.log(response.email);
-                }}
-                /> */}
-            </div>
+
         </form>
     </Layout>
   )
 }
+
+ProfileScreen.auth = true;
+export default ProfileScreen;

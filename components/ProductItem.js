@@ -7,7 +7,7 @@ export const ProductItem = ({ product, addToCartHandler }) => {
    // const { slug } = query;
 
   return (
-    <div className='card'>
+    <div className='card hover:shadow-lg'>
         <Link href={`/product/${product.slug}`} legacyBehavior>
             <a>
                 <img src={product.image} alt={product.name} className='rounded shadow' />
